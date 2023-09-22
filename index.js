@@ -36,7 +36,14 @@ class Tree {
       this.prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
     }
   }
+
+  find(value, root = this.root) {
+    if (root.value === value) return root;
+    if (value > root.value) return this.find(value, root.right);
+    return this.find(value, root.left);
+  }
 }
 
 const tree = new Tree([1, 23, 5, 56, 7, 34, 23, 6, 7, 5]);
+console.log(tree.find(34));
 tree.prettyPrint();
