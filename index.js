@@ -14,4 +14,6 @@ function builtTree(arr, start = 0, end = arr.length - 1) {
   node.right = builtTree(arr, mid + 1, end);
   return node;
 }
-console.log(builtTree([...new Set([1, 2, 3, 3, 4, 4])]));
+console.log(
+  builtTree([...new Set([4, 4, 6, 10, 2, 6, 5, 3, 60].sort((a, b) => a - b))])
+);
