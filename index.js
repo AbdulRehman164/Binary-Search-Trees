@@ -42,8 +42,19 @@ class Tree {
     if (value > root.value) return this.find(value, root.right);
     return this.find(value, root.left);
   }
+
+  insert(value, root = this.root) {
+    if (root.right?.value === value || root.left?.value === value) return;
+    else if (root.right === null && value > root.value)
+      root.right = new Node(value);
+    else if (root.left === null && value < root.value)
+      root.left = new Node(value);
+    else if (value > root.value) this.insert(value, root.right);
+    else this.insert(value, root.left);
+  }
 }
 
 const tree = new Tree([1, 23, 5, 56, 7, 34, 23, 6, 7, 5]);
-console.log(tree.find(34));
+tree.prettyPrint();
+tree.insert(0);
 tree.prettyPrint();
