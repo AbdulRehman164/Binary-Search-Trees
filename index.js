@@ -52,11 +52,13 @@ class Tree {
     else if (value > root.value) this.insert(value, root.right);
     else this.insert(value, root.left);
   }
-  height(node, rightNum = 0, leftNum = 0) {
-    if (!node.value) return rightNum > leftNum ? rightNum : leftNum;
-    if (node.left?.value) leftNum++;
-    else if (node.right?.value) rightNum++;
-    return this.height(node.left, rightNum, leftNum);
+  height(node, num = 0, arr = []) {
+    if (node.left === null || node.right === null) {
+      arr.push(num);
+    }
+    if (node.left !== null) this.height(node.left, num + 1, arr);
+    if (node.right !== null) this.height(node.right, num + 1, arr);
+    return Math.max(...arr);
   }
 }
 
@@ -64,4 +66,8 @@ const tree = new Tree([1, 23, 5, 56, 7, 34, 23, 6, 7, 5]);
 tree.prettyPrint();
 tree.insert(0);
 tree.insert(2);
+tree.insert(3);
+tree.insert(4);
+tree.insert(6);
 tree.prettyPrint();
+console.log(tree.height(tree.root));
