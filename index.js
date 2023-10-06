@@ -38,12 +38,20 @@ class Tree {
   }
 
   find(value, root = this.root) {
+    if (!root) {
+      console.log('Tree is empty');
+      return;
+    }
     if (root.value === value) return root;
     if (value > root.value) return this.find(value, root.right);
     return this.find(value, root.left);
   }
 
   insert(value, root = this.root) {
+    if (!root) {
+      console.log('There is no root, cannot insert');
+      return;
+    }
     if (root.right?.value === value || root.left?.value === value) return;
     else if (root.right === null && value > root.value)
       root.right = new Node(value);
@@ -53,6 +61,7 @@ class Tree {
     else this.insert(value, root.left);
   }
   height(node, num = 0, arr = []) {
+    if (!node) return;
     if (node.left === null || node.right === null) {
       arr.push(num);
     }
@@ -62,12 +71,5 @@ class Tree {
   }
 }
 
-const tree = new Tree([1, 23, 5, 56, 7, 34, 23, 6, 7, 5]);
+const tree = new Tree([1, 2, 3, 4, 5]);
 tree.prettyPrint();
-tree.insert(0);
-tree.insert(2);
-tree.insert(3);
-tree.insert(4);
-tree.insert(6);
-tree.prettyPrint();
-console.log(tree.height(tree.root));
