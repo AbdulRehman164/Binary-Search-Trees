@@ -39,7 +39,7 @@ class Tree {
 
   find(value, root = this.root) {
     if (!root) {
-      console.log('Tree is empty');
+      console.log('value not found');
       return;
     }
     if (root.value === value) return root;
@@ -69,7 +69,19 @@ class Tree {
     if (node.right !== null) this.height(node.right, num + 1, arr);
     return Math.max(...arr);
   }
+  levelOrder(root = this.root, Q = [], arr = []) {
+    if (!root) return;
+    Q.push(root);
+    while (Q.length !== 0) {
+      const current = Q.shift();
+      arr.push(current.value);
+      if (current.left) Q.push(current.left);
+      if (current.right) Q.push(current.right);
+    }
+    return arr;
+  }
 }
 
-const tree = new Tree([1, 2, 3, 4, 5]);
+const tree = new Tree([]);
 tree.prettyPrint();
+console.log(tree.levelOrder());
