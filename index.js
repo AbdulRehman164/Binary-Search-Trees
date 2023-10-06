@@ -69,7 +69,10 @@ class Tree {
     if (node.right !== null) this.height(node.right, num + 1, arr);
     return Math.max(...arr);
   }
-  levelOrder(root = this.root, Q = [], arr = []) {
+  levelOrder(cb) {
+    const root = this.root,
+      Q = [],
+      arr = [];
     if (!root) return;
     Q.push(root);
     while (Q.length !== 0) {
@@ -78,10 +81,18 @@ class Tree {
       if (current.left) Q.push(current.left);
       if (current.right) Q.push(current.right);
     }
-    return arr;
+    if (cb) {
+      arr.forEach((value) => {
+        cb(value);
+      });
+    } else {
+      return arr;
+    }
   }
 }
 
-const tree = new Tree([]);
+const tree = new Tree([1, 2, 3, 4, 5]);
 tree.prettyPrint();
-console.log(tree.levelOrder());
+tree.levelOrder((value) => {
+  console.log(value);
+});
