@@ -89,10 +89,16 @@ class Tree {
       return arr;
     }
   }
+  isBalanced() {
+    if (!this.root) return;
+    const leftHeight = this.height(this.root.left),
+      rightHeight = this.height(this.root.right);
+    return (
+      Math.max(leftHeight, rightHeight) - Math.min(leftHeight, rightHeight) <= 1
+    );
+  }
 }
 
 const tree = new Tree([1, 2, 3, 4, 5]);
 tree.prettyPrint();
-tree.levelOrder((value) => {
-  console.log(value);
-});
+console.log(tree.isBalanced());
