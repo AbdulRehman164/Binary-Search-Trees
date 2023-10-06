@@ -97,8 +97,16 @@ class Tree {
       Math.max(leftHeight, rightHeight) - Math.min(leftHeight, rightHeight) <= 1
     );
   }
+  reBalance() {
+    this.root = new Tree(this.levelOrder()).root;
+  }
 }
 
 const tree = new Tree([1, 2, 3, 4, 5]);
+tree.insert(-1);
+tree.insert(-2);
+tree.prettyPrint();
+console.log(tree.isBalanced());
+tree.reBalance();
 tree.prettyPrint();
 console.log(tree.isBalanced());
